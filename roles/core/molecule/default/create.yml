@@ -1,0 +1,32 @@
+---
+- name: Create
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  # no_log: "{{ molecule_no_log }}"
+  collections:
+    - community.docker
+
+  vars:
+    container_name: instance
+    container_image: geerlingguy/docker-rockylinux8-ansible:latest
+
+  tasks:
+    - name: Create container
+      community.docker.docker_container:
+        name: "{{ container_name }}"
+        image: "{{ container_image }}"
+        state: started
+        recreate: false
+        command: sleep 1d  # /usr/sbin/init
+        # ポートフォワード設定
+        # ports:
+        #   - "8080:80"
+
+    - name: Add container to molecule inventory
+      # Moleculeが接続するコンテナを指定
+      ansible.builtin.add_host:
+        name: "{{ container_name }}"
+        ansible_connection: docker
+        ansible_user: root
+      changed_when: false

@@ -92,7 +92,8 @@ site.yml (Example)
 
 ## 🛠 Development & Testing
 
-本コレクションは Molecule + Docker による自動テスト環境をサポートしています。 PRを作成する前に、ローカル環境でテストを通過させてください。
+本コレクションは Molecule + Docker による自動テスト環境をサポートしています。  
+PRを作成する前に、ローカル環境でテストを通過させてください。
 
 ### Prerequisites
 - Docker Desktop (or OrbStack / Colima)

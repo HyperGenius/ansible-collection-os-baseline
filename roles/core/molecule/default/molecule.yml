@@ -1,0 +1,31 @@
+---
+# Dependency management (download roles/collections)
+dependency:
+  name: galaxy
+  options:
+    requirements-file: requirements.yml
+
+platforms:
+  - name: instance
+
+provisioner:
+  name: ansible
+  playbooks:
+    # prepare, verify, side_effectは必要に応じて追加
+    create: create.yml
+    converge: converge.yml
+    destroy: destroy.yml
+  inventory:
+    host_vars:
+      instance:
+        ansible_connection: docker
+
+scenario:
+  name: default
+  test_sequence:
+    - dependency
+    - destroy
+    - create
+    # - prepare
+    # - converge
+    - destroy
