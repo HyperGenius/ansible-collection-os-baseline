@@ -1,3 +1,24 @@
+# roles/core/tasks/main.yml
+---
+# タイムゾーンの設定
 - name: Set timezone to Asia/Tokyo
   community.general.timezone:
     name: Asia/Tokyo
+
+# パッケージのインストール
+- name: Install base packages
+  package:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ core_packages_base }}"
+
+# ロケールの設定
+- name: Install japanese language pack
+  package:
+    name: glibc-langpack-ja
+    state: present
+  when: core_locale == 'ja_JP.UTF-8'
+
+- name: Set system locale
+  command: localectl set-locale LANG={{ core_locale }}
+  changed_when: false # 冪等性の担保が難しいため、とりあえずchangedを出さない（本来はチェックが必要）

@@ -21,6 +21,6 @@ RHEL系OSの基本設定を行います。
 ```yaml
 - hosts: all
   roles:
-    - role: mycompany.rhel_baseline.core
+    - role: os_baseline.rhel_baseline.core
       vars:
         core_timezone: "Asia/Tokyo"

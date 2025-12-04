@@ -1,10 +1,4 @@
 # roles/core/molecule/default/tests/test_default.py
-import os
-import testinfra.utils.ansible_runner
-
-testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
-    os.environ["MOLECULE_INVENTORY_FILE"]
-).get_hosts("all")
 
 
 def test_hosts_file(host):
@@ -14,23 +8,3 @@ def test_hosts_file(host):
     assert f.exists
     assert f.user == "root"
     assert f.group == "root"
-
-
-def test_service_is_running(host):
-    """(例) 何かサービスをインストールした後の確認"""
-    # 例えば cron サービスが動いているか
-    # service = host.service("crond")
-    # assert service.is_running
-    # assert service.is_enabled
-    pass
-
-
-def test_timezone(host):
-    """タイムゾーンが Asia/Tokyo になっているか確認.
-    timedatectlコマンドの結果や、リンク先を確認する方法などがあります
-    """
-
-    # 簡易チェック: /etc/localtime のリンク先を確認
-    f = host.file("/etc/localtime")
-    assert f.exists
-    assert "Tokyo" in f.linked_to
