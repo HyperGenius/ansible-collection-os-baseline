@@ -5,3 +5,7 @@ description: RHEL系OSのベースライン管理用Ansible Collection
 namespace: os_baseline
 name: rhel_baseline
 version: 1.0.0
+
+# 依存関係の定義
+dependencies:
+  "community.general": ">=5.1.0"
