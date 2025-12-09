@@ -13,6 +13,7 @@ OSのベースライン設定の一部として、`os-baseline` コレクショ�
 | 変数名 | デフォルト値 | 説明 |
 | :--- | :--- | :--- |
 | `zabbix_version` | `6.0` | Zabbix Agent 2のメジャーバージョン (LTS推奨) |
+| `zabbix_release_package_version` | `5` | Zabbixリリースパッケージのバージョン (通常は変更不要) |
 | `zabbix_server_ip` | `127.0.0.1` | デフォルトのZabbix Server IP (環境ごとに上書きすること) |
 
 ## 設計方針

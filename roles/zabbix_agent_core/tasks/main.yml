@@ -4,7 +4,7 @@
 # Zabbix公式リポジトリのインストール
 - name: Install Zabbix release repository
   yum:
-    name: "https://repo.zabbix.com/zabbix/{{ zabbix_version }}/rhel/{{ ansible_distribution_major_version }}/x86_64/zabbix-release-{{ zabbix_version }}-5.el{{ ansible_distribution_major_version }}.noarch.rpm"
+    name: "https://repo.zabbix.com/zabbix/{{ zabbix_version }}/rhel/{{ ansible_distribution_major_version }}/x86_64/zabbix-release-{{ zabbix_version }}-{{ zabbix_release_package_version }}.el{{ ansible_distribution_major_version }}.noarch.rpm"
     state: present
     disable_gpg_check: true
 

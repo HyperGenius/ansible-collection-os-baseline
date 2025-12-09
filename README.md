@@ -55,7 +55,6 @@ ansible-galaxy collection build
 ```bash
 ansible-galaxy collection install os_baseline-rhel_baseline-1.0.0.tar.gz
 ```
-```
 
 ## 📖 Usage
 Playbookからは、名前空間付きのFQCN (os_baseline.rhel_baseline.role_name) で呼び出してください。
