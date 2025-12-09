@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: "Include zabbix_agent_core role"
+      include_role:
+        name: "os_baseline.rhel_baseline.zabbix_agent_core"

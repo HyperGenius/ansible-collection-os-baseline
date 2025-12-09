@@ -1,0 +1,47 @@
+---
+# roles/zabbix_agent_core/tasks/main.yml
+
+# Zabbix公式リポジトリのインストール
+- name: Install Zabbix release repository
+  yum:
+    name: "https://repo.zabbix.com/zabbix/{{ zabbix_version }}/rhel/{{ ansible_distribution_major_version }}/x86_64/zabbix-release-{{ zabbix_version }}-5.el{{ ansible_distribution_major_version }}.noarch.rpm"
+    state: present
+    disable_gpg_check: true
+
+# GPG鍵のインポート
+- name: Import Zabbix GPG key
+  rpm_key:
+    state: present
+    key: "https://repo.zabbix.com/zabbix-official-repo.key"
+
+# Zabbix Agent 2 のインストール
+- name: Install zabbix-agent2 package
+  package:
+    name: zabbix-agent2
+    state: present
+
+# 拡張設定用ディレクトリの作成
+- name: Create zabbix_agent2.d directory
+  file:
+    path: /etc/zabbix/zabbix_agent2.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+# 設定ファイルの配置
+- name: Deploy zabbix_agent2.conf template
+  template:
+    src: zabbix_agent2.conf.j2
+    dest: /etc/zabbix/zabbix_agent2.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart zabbix-agent2
+
+# サービスの起動と自動起動設定
+- name: Enable and start zabbix-agent2 service
+  service:
+    name: zabbix-agent2
+    state: started
+    enabled: true

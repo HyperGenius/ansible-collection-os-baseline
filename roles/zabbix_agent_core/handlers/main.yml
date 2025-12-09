@@ -1,0 +1,7 @@
+---
+# roles/zabbix_agent_core/handlers/main.yml
+
+- name: restart zabbix-agent2
+  service:
+    name: zabbix-agent2
+    state: restarted

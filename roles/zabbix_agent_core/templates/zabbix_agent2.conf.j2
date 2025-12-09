@@ -1,0 +1,16 @@
+# Zabbix Agent 2 configuration file
+# Managed by Ansible - DO NOT EDIT MANUALLY
+# Role: os_baseline.rhel_baseline.zabbix_agent_core
+
+# PIDファイルのパス
+PidFile=/var/run/zabbix/zabbix_agent2.pid
+
+# ログファイルのパス
+LogFile=/var/log/zabbix/zabbix_agent2.log
+
+# ログファイルサイズ (MB単位)
+LogFileSize=0
+
+# 拡張設定ディレクトリ (conf.dパターン)
+# ServerActive, Hostname 等の環境固有値は zabbix_agent2.d/ 配下で管理すること
+Include=/etc/zabbix/zabbix_agent2.d/*.conf

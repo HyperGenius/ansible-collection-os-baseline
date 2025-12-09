@@ -1,0 +1,8 @@
+---
+# roles/zabbix_agent_core/defaults/main.yml
+
+# Zabbix Agent 2 のメジャーバージョン (LTS推奨)
+zabbix_version: "6.0"
+
+# デフォルトのZabbix Server IP (環境ごとに上書きすること)
+zabbix_server_ip: "127.0.0.1"
