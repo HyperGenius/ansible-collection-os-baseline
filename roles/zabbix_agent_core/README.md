@@ -14,7 +14,6 @@ OSのベースライン設定の一部として、`os-baseline` コレクショ�
 | :--- | :--- | :--- |
 | `zabbix_version` | `6.0` | Zabbix Agent 2のメジャーバージョン (LTS推奨) |
 | `zabbix_release_package_version` | `5` | Zabbixリリースパッケージのバージョン (通常は変更不要) |
-| `zabbix_server_ip` | `127.0.0.1` | デフォルトのZabbix Server IP (環境ごとに上書きすること) |
 
 ## 設計方針
 
@@ -42,7 +41,6 @@ Zabbix公式リポジトリを使用し、GPG鍵の検証を行っています�
     - role: os_baseline.rhel_baseline.zabbix_agent_core
       vars:
         zabbix_version: "6.0"
-        zabbix_server_ip: "192.168.1.100"
 ```
 
 ### 環境固有設定の例

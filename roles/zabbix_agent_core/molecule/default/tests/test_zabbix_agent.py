@@ -21,7 +21,7 @@ def test_zabbix_agent2_service_enabled(host):
 
 def test_zabbix_agent2_port_listening(host):
     """TCP 10050 でリッスンしていることを確認"""
-    socket = host.socket("tcp://0.0.0.0:10050")
+    socket = host.socket("tcp://10050")
     assert socket.is_listening, "ポート 10050 でリッスンしていません"
 
 

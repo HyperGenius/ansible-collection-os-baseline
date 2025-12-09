@@ -92,9 +92,6 @@ site.yml (Example)
     
     # 5. Zabbix Agent 2 (全サーバー標準監視)
     - role: os_baseline.rhel_baseline.zabbix_agent_core
-      vars:
-        zabbix_version: "6.0"
-        zabbix_server_ip: "192.168.1.100"
 ```
 
 ## 🛠 Development & Testing

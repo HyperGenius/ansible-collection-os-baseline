@@ -6,6 +6,3 @@ zabbix_version: "6.0"
 
 # Zabbix リリースパッケージのバージョン (通常は変更不要)
 zabbix_release_package_version: "5"
-
-# デフォルトのZabbix Server IP (環境ごとに上書きすること)
-zabbix_server_ip: "127.0.0.1"
