@@ -45,5 +45,5 @@ def test_zabbix_agent2_conf_includes_d_directory(host):
     """zabbix_agent2.conf に Include 設定が含まれていることを確認"""
     conf_file = host.file("/etc/zabbix/zabbix_agent2.conf")
     assert conf_file.exists, "/etc/zabbix/zabbix_agent2.conf が存在しません"
-    assert conf_file.contains("Include=/etc/zabbix/zabbix_agent2.d/\\*.conf"), \
+    assert conf_file.contains("Include=/etc/zabbix/zabbix_agent2.d/*.conf"), \
         "zabbix_agent2.conf に Include=/etc/zabbix/zabbix_agent2.d/*.conf が含まれていません"
