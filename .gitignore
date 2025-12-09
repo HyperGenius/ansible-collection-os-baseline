@@ -3,3 +3,9 @@ venv/
 
 # Python cache files
 **/__pycache__
+
+# Build artifacts
+*.tar.gz
+
+# macOS
+.DS_Store
