@@ -1,4 +1,4 @@
-# Ansible Collection: mycompany.rhel_baseline
+# Ansible Collection: os_baseline.rhel_baseline
 
 ![CI Status](https://img.shields.io/badge/build-passing-brightgreen)
 ![Ansible Version](https://img.shields.io/badge/ansible-2.9%2B-blue)
@@ -22,6 +22,7 @@
 | **[security](roles/security/)** | セキュリティ堅牢化 | SSHD設定、Firewalld、SELinux、パスワードポリシー等のコンプライアンス準拠設定。 |
 | **[users](roles/users/)** | アカウント管理 | 管理者ユーザー作成、SSH鍵配布、Sudoers権限管理。 |
 | **[monitoring](roles/monitoring/)** | 監視エージェント | Zabbix Agent, Datadog, Fluentd等のインストールと初期設定。 |
+| **[zabbix_agent_core](roles/zabbix_agent_core/)** | Zabbix Agent 2 | 全サーバー標準監視エージェント（Zabbix Agent 2）のインストールと基本設定。 |
 
 ---
 
@@ -32,7 +33,7 @@
 
 ```bash
 # GitHubから直接インストールする場合（SSH設定済み）
-ansible-galaxy collection install git@github.com:mycompany/ansible-collection-os-baseline.git
+ansible-galaxy collection install git@github.com:HyperGenius/ansible-collection-os-baseline.git
 ```
 
 ### 2. クローズド環境への持ち込み (Offline / JTC Style)
@@ -42,7 +43,7 @@ ansible-galaxy collection install git@github.com:mycompany/ansible-collection-os
 
 ```bash
 ansible-galaxy collection build
-# => mycompany-rhel_baseline-1.0.0.tar.gz が生成されます
+# => os_baseline-rhel_baseline-1.0.0.tar.gz が生成されます
 ```
 
 #### 2. Transfer (ターゲット環境)
@@ -52,11 +53,12 @@ ansible-galaxy collection build
 #### 3. Install (ターゲット環境)
 
 ```bash
-ansible-galaxy collection install mycompany-rhel_baseline-1.0.0.tar.gz
+ansible-galaxy collection install os_baseline-rhel_baseline-1.0.0.tar.gz
+```
 ```
 
 ## 📖 Usage
-Playbookからは、名前空間付きのFQCN (mycompany.rhel_baseline.role_name) で呼び出してください。
+Playbookからは、名前空間付きのFQCN (os_baseline.rhel_baseline.role_name) で呼び出してください。
 
 site.yml (Example)
 ```yaml
@@ -72,13 +74,13 @@ site.yml (Example)
 
   roles:
     # 1. 基本設定
-    - role: mycompany.rhel_baseline.core
+    - role: os_baseline.rhel_baseline.core
     
     # 2. セキュリティ堅牢化 (coreの後に実行)
-    - role: mycompany.rhel_baseline.security
+    - role: os_baseline.rhel_baseline.security
     
     # 3. ユーザー管理
-    - role: mycompany.rhel_baseline.users
+    - role: os_baseline.rhel_baseline.users
       vars:
         users_accounts:
           - name: admin-user
@@ -86,8 +88,14 @@ site.yml (Example)
             ssh_key: "{{ vault_admin_ssh_key }}"
 
     # 4. 監視エージェント (本番のみ適用する例)
-    - role: mycompany.rhel_baseline.monitoring
+    - role: os_baseline.rhel_baseline.monitoring
       when: env_type == 'production'
+    
+    # 5. Zabbix Agent 2 (全サーバー標準監視)
+    - role: os_baseline.rhel_baseline.zabbix_agent_core
+      vars:
+        zabbix_version: "6.0"
+        zabbix_server_ip: "192.168.1.100"
 ```
 
 ## 🛠 Development & Testing
